@@ -65,6 +65,11 @@ case ${AUTH} in
         ;;
 esac
 
+# Enable NiFi debugging debugging
+if [[ -n $NIFI_DEBUG ]] ; then
+    . "${scripts_dir}/update_logback.sh"
+fi
+
 # Continuously provide logs so that 'docker logs' can    produce them
 tail -F "${NIFI_HOME}/logs/nifi-app.log" &
 "${NIFI_HOME}/bin/nifi.sh" run &
